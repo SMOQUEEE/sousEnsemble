@@ -40,7 +40,11 @@ retour extraction(FILE *entree)
     int K = atoi(nbSE);
     // printf("Le nombre de sous-ensembles est : %s qui est %d", nbSE,K);    
 
-    char ** matrice = (char**) malloc(sizeof(char*)*K*(N+1));
+   char **matrice = (char**) malloc(sizeof(char*) * K);
+    for (int i = 0; i < K; i++) {
+        matrice[i] = (char*) malloc(sizeof(char) * N);
+    }
+    
     int i,j;
     char a;
     // teste avec boucle for

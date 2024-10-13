@@ -14,6 +14,7 @@ typedef struct  retour retour;
 
 
 void unionDesEnsembles(char *resultat, char *ensemble, int N) {
+    // On additionnne un ensemble existant à un entre ensemble contenant N éléments
     for (int i = 0; i < N; i++)
     {
         if (ensemble[i] == '1') 
@@ -37,9 +38,8 @@ int estEnsembleComplet(char *ensemble,int N) {
 
 // Fonction qui effectue l'union de plusieurs ensembles et vérifie si le résultat est "1111111"
 int compterEtVerifierCombination(const char *combinaison, char** ensembles, int *indices, int N, int K) {
-    // char ensembleCombine[N + 1] = "0000000"; 
+    // On initialise une chaine de caractère contenant que des 0"; 
     char * ensembleCombine = (char*) malloc(sizeof(char)*(N+1));
-    
     int i;
     for(i = 0; i < N+1; i++)
     {
@@ -50,12 +50,11 @@ int compterEtVerifierCombination(const char *combinaison, char** ensembles, int 
 
     int count = 0;  
 
-    // On parcourt les ensembles
+    // On parcourt les ensembles et nous les combinons
     for (int j = 0; j < K; j++) {
-        // Vérifie si le j-ième caractère de la combinaison est '1'
         if (combinaison[j] == '1') {
             unionDesEnsembles(ensembleCombine, ensembles[j], N);
-            indices[count++] = j; 
+            indices[count++] = j; // On incremente le nombre d'opération et l'ajoutant dans la liste
         }
     }
 
@@ -72,22 +71,28 @@ void trouverCombinationMinimale(char ** ensembles, int N, int K) {
     int meilleuresIndices[K];  
     int indicesCourants[K];  
 
-    // Parcours toutes les combinaisons possibles
+    // Parcours toutes les combinaisons possibles (1 << K) reprèsente 2 puissance k
     for (int i = 0; i < (1 << K); i++) {
-        char combinaison[K + 1];  // Taille K + 1 pour le caractère nul
+        char combinaison[K + 1];  
         int temp = i;
+    
 
-        // Générer la combinaison de manière simple
         for (int j = 0; j < K; j++) {
-            combinaison[j] = (temp % 2 == 1) ? '1' : '0';  // Prendre le bit de poids faible
-            temp /= 2;  // Décale temp vers la droite pour le prochain bit
+            if(temp%2 == 0) 
+            {
+                combinaison[j] = '1';
+            }
+            else combinaison[j] = '0';
+            temp /= 2;  
         }
-        combinaison[K] = '\0';  // Terminer la chaîne
+        combinaison[K] = '\0'; 
 
-        // Vérifier la combinaison
+
+        // On vérifie si la combinaison est complète : Si elle donne que de "11111..."
+
         int count = compterEtVerifierCombination(combinaison, ensembles, indicesCourants,N,K);
-
-        // Mise à jour de la meilleure combinaison
+        
+        // Si la combinaison est plus courte que la meilleure, on la stocke et on met à jour les indices de la meilleure combinaison.
         if (count < minCombination) {
             minCombination = count;
             for (int j = 0; j < count; j++) {
@@ -96,15 +101,17 @@ void trouverCombinationMinimale(char ** ensembles, int N, int K) {
         }
     }
 
-    // Afficher la meilleure combinaison
+    // On vérifie s'il existe une combinaison complète et nous l'affichons
     if (minCombination < INT_MAX) {
-        printf("La combinaison minimale qui donne 1111111 est : ");
+        printf("La combinaison minimale qui nous donne un ensemble complet est : ");
         for (int i = 0; i < minCombination; i++) {
             printf("%d ", meilleuresIndices[i]);  
         }
         printf("\n");
-    } else {
-        printf("Aucune combinaison ne donne 1111111.\n");
+    } 
+    // Si il en existe aucune on affiche ce message:
+    else {
+        printf("Aucune combinaison ne nous donne un ensemble complet.\n");
     }
 }
 

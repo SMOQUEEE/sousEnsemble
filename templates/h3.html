@@ -1,0 +1,115 @@
+<!-- Fichier pour la page d'Accueil -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('https://i.ytimg.com/vi/XnXqYUbucdo/maxresdefault.jpg') no-repeat center center fixed;
+            background-size: cover;
+       }
+
+       .left-buttons {
+           display: flex;
+           flex-direction: column;
+           align-items: flex-start;
+           margin-left: 20px; /* Adjust the margin as needed */
+        }
+        .top-right-button {
+           position: fixed;
+           top: 0;
+           right: 0;
+           margin: 20px; /* Adjust the margin as needed */
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: white; /* Couleur du titre en blanc */
+            margin-top: 30px;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 40px; /* Augmentation de la marge pour agrandir la zone des boutons */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            border-radius: 50% 20% / 10% 40%;
+            padding: 30px;
+            position: fixed;
+            top: 0;
+            right: 0;   
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            border-radius: 40% 10% / 50% 20%;
+            border-bottom-style: groove;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            background-color: #00ba95;
+            color: white;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.225); 
+        }
+
+        #admin {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<script>
+    function toggleMenu() {
+        var menuContainer = document.getElementById('menuContainer');
+        // Toggle the visibility of the menu container
+        menuContainer.style.display = (menuContainer.style.display === 'none') ? 'flex' : 'none';
+    }
+     window.location.herf="/login";
+</script>
+<body>
+    <h1>Bienvenue sur GOAT!</h1>
+    <div class="left-buttons">
+        <a href="/login"><button id="connexion">Connexion</button></a>
+        <a href="/register"><button id="inscription">Inscription</button></a>
+        
+    </div>
+    <div class="top-right-button">
+        <button id="toggleMenuButton" onclick="toggleMenu()">|||</button>
+    </div>
+    <div id="menuContainer" class="button-container" style="display: none;">
+        <a href="/login"><button id="connexion">Mon compte</button></a>
+        <a href="/settings.html"><button id="settings">Settings</button></a>
+        <a href="/search"><button id="search">Search</button></a>
+       
+    </div>
+    
+</body>
+</html>
+
+

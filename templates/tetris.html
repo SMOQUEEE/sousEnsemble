@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morpion</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 40px; /* Augmentation de la marge pour agrandir la zone des boutons */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            background-color: rgb(0, 255, 8);
+            color: white;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 5px;
+            background-color: rgba(255, 255, 255, 0.125);
+        }
+
+        .cell {
+            width: 100px;
+            height: 100px;
+            font-size: 24px;
+            text-align: center;
+            line-height: 100px;
+            background-color: rgba(26, 191, 31, 0.50);
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        #video-bg2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+        }
+
+        #messageContainer {
+            font-family: 'Orbitron', sans-serif;
+            position: absolute;
+            bottom: 0; /* Position en bas de l'écran */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: rgb(0, 255, 8);
+            text-align: center;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: auto; /* Ajustez la hauteur automatiquement en fonction du contenu */
+            font-size: 40px;
+        }
+
+        h1 {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: rgba(0, 255, 8, 0.5);
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container"></div>
+    <div class="video-container">
+        <video autoplay muted loop id="video-bg2">
+            <source src="../static/fond/matrix.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <h1>Bienvenue {{ username }} ! Il est l'heure d'affronter notre terrible IA de morpion !</h1>
+        <div id="board"></div>
+        <div id="messageContainer"></div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const board = document.getElementById('board');
+            const cells = Array.from({ length: 9 }, (_, index) => createCell(index));
+    
+            let currentPlayer = 'X';
+            let gameBoard = Array(9).fill('');
+    
+            function createCell(index) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.dataset.index = index;
+                cell.addEventListener('click', () => makeMove(index));
+                board.appendChild(cell);
+                return cell;
+            }
+    
+            function makeMove(index) {
+                if (gameBoard[index] === '' && !isGameOver()) {
+                    gameBoard[index] = currentPlayer;
+                    cells[index].textContent = currentPlayer;
+                    if (isGameOver()) {
+                        updateMessage(`${currentPlayer} wins!`);
+                    } else if (!gameBoard.includes('')) {
+                        updateMessage("Egalité!");
+                    } else {
+                        currentPlayer = currentPlayer === 'X' ? 'IA' : 'X';
+                        if (currentPlayer === 'IA') {
+                            makeAIMove();
+                        }
+                    }
+                }
+            }
+    
+            function isGameOver() {
+                const winPatterns = [
+                    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                    [0, 4, 8], [2, 4, 6]
+                ];
+    
+                return winPatterns.some(pattern => {
+                    const [a, b, c] = pattern;
+                    return gameBoard[a] !== '' && gameBoard[a] === gameBoard[b] && gameBoard[b] === gameBoard[c];
+                });
+            }
+    
+            function makeAIMove() {
+                if (!isGameOver()) {
+                    let emptyCells = gameBoard.reduce((acc, cell, index) => {
+                        if (cell === '') {
+                            acc.push(index);
+                        }
+                        return acc;
+                    }, []);
+    
+                    if (emptyCells.length > 0) {
+                        const randomIndex = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+                        setTimeout(() => makeMove(randomIndex), 250);
+                    }
+                }
+            }
+    
+            function updateMessage(msg) {
+                const messageContainer = document.getElementById('messageContainer');
+                messageContainer.innerHTML = `<p>${msg}</p>`;
+    
+                // Ajout des boutons
+                const restartButton = document.createElement('button');
+                restartButton.textContent = 'Recommencer';
+                restartButton.addEventListener('click', function () {
+                    // Logique à exécuter lors du clic sur le bouton "Recommencer"
+                    currentPlayer = 'X';
+                    gameBoard = Array(9).fill('');
+                    cells.forEach(cell => {
+                        cell.textContent = '';
+                    });
+                    messageContainer.innerHTML = ''; // Supprimer le message
+                    // Si le joueur est 'IA', faire le premier mouvement
+                    if (currentPlayer === 'IA') {
+                        makeAIMove();
+                    }
+                });
+                messageContainer.appendChild(restartButton);
+    
+                const continueButton = document.createElement('button');
+                continueButton.textContent = 'Continuer';
+                continueButton.addEventListener('click', function () {
+                    // Logique à exécuter lors du clic sur le bouton "Continuer"
+                    window.location.href = "/login";
+                });
+                messageContainer.appendChild(continueButton);
+            }
+    
+            board.addEventListener('click', function () {
+                if (currentPlayer === 'X') {
+                    makeAIMove();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

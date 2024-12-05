@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyeux Noël !</title>
+    <style>
+        @font-face {
+            font-family: 'Noel';
+            src: url('static/police/MerryChristmasFlake.ttf') format('truetype');
+        }
+
+        #toggleButton {
+            width: 100px; 
+            height: 100px; 
+            border-radius: 100%;
+            transition: all 0.3s ease;
+        }
+
+        #toggleButton:hover {
+            box-shadow: 0 0 30px rgb(195, 93, 93);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #video-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+        }
+
+        .content {
+            font-family: 'Noel';
+            position: relative;
+            z-index: 2;
+            color: #b11111; /* Example text color */
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container" style="position: relative; overflow: hidden;">
+        <video autoplay muted loop id="video-bg">
+            <source src="{{ video_url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="content">
+            <h1>Bienvenue {{ username }} ! Appuyer sur cette magnifique boule !</h1>
+            <img id="toggleButton" src="{{img_url}}" onclick="moveButton()" alt="Bouton Image">
+        </div>
+    </div>
+
+    <script>
+
+    var currentPage = "/index";
+        document.addEventListener('DOMContentLoaded', function() {
+            // Code à exécuter lorsque le DOM est entièrement chargé
+            var button = document.getElementById('toggleButton');
+            if (window.location.pathname === currentPage) {
+            // Effectuer un clic automatique lorsque la page se charge
+            button.click();
+            }
+        });
+
+        function resizeVideo() {
+            var video = document.getElementById('video-bg');
+            var container = document.querySelector('.video-container');
+            var aspectRatio = video.videoWidth / video.videoHeight;
+            var newHeight = container.offsetWidth / aspectRatio;
+            video.style.width = '100%';
+            video.style.height = newHeight + 'px';
+        }
+
+        var messages = [
+            "Elle s'enfuit !",
+            "Encore une fois",
+            "Un dernier petit effort !",
+        ];
+
+
+        var clickCount = 0;
+        var currentIndex = 0;
+
+        function moveButton() {
+            clickCount++;
+
+            if (clickCount !== 5) {
+                var button = document.getElementById('toggleButton');
+                var container = document.querySelector('.video-container');
+                var containerRect = container.getBoundingClientRect();
+
+                var randomX = (Math.random() * 1000) - 500;
+                var randomY = (Math.random() * 600) - 300;
+
+                // Animer le bouton vers la nouvelle position
+                button.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                if (clickCount !== 1) {
+                    document.querySelector('.content h1').innerText = messages[currentIndex];
+                    currentIndex ++;
+                }
+            } else {
+                // Rediriger l'utilisateur vers une nouvelle page après deux clics
+                window.location.href = "/index2";
+            }
+        }
+
+        // JavaScript to resize the video when the window is resized
+        window.addEventListener('resize', resizeVideo);
+
+        // Trigger the resize event to initially set the correct size
+        window.addEventListener('load', resizeVideo);
+
+        window.addEventListener('beforeunload', function() {
+            // Code à exécuter avant le déchargement de la page
+            // Supprimer les événements, réinitialiser les variables, etc.
+            clickCount = 0;
+            currentIndex = 0;
+            // Ajoutez d'autres actions de nettoyage au besoin
+        });
+    </script>
+</body>
+</html>

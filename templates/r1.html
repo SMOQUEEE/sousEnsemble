@@ -1,0 +1,189 @@
+{% extends "outils.html" %} <!-- hériter du contenu d'un autre modèle (outil.html) -->
+
+{% block title %}Inscription{% endblock %}
+
+{% block content %}
+    <style>
+        /* Styles CSS */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('https://www.touteleurope.eu/wp-content/uploads/2020/12/traditions-noel-europe.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 300px;
+            background-color: rgba(119, 30, 30, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(157, 44, 44, 0.3);
+        }
+
+        label {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        div {
+            margin: 10px 0;
+            position: relative;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input::placeholder {
+            color: #888;
+        }
+
+        input:focus {
+            outline: none;
+            border: 2px solid #8e24aa;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        li {
+            margin: 5px 0;
+            font-size: 0.9rem;
+            color: red;
+        }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .icon {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            height: 100%;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #333;
+        }
+
+        .user-icon {
+            left: 0;
+        }
+
+        .key-icon {
+            left: 0;
+        }
+
+        #home-button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #3f51b5;
+            color: white;
+            text-decoration: none;
+        }
+
+        #home-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+        }
+
+        #create-account-button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #4caf50;
+            color: white;
+        }
+
+        #create-account-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+        }
+
+    </style>
+
+    <h1>Créer un compte</h1>
+    <form action="{{ url_for('register') }}" method="POST">
+        <div>
+            <label for="{{ form.username.name }}">Nom d'utilisateur</label>
+            <div class="input-icon">
+                <span class="icon user-icon">
+                    <i class="fas fa-user"></i>
+                </span>
+                {{ form.username(class_='form-control', placeholder="Nom d'utilisateur", autocomplete="off", autofocus=true) }}
+            </div>
+            <ul>
+                {% for error in form.username.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <label for="{{ form.password.name }}">Mot de passe</label>
+            <div class="input-icon">
+                <span class="icon key-icon">
+                    <i class="fas fa-key"></i>
+                </span>
+                {{ form.password(class_='form-control', placeholder="Mot de passe") }}
+            </div>
+            <ul>
+                {% for error in form.password.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <label for="{{ form.confirm.name }}">Confirmer le mot de passe</label>
+            <div class="input-icon">
+                <span class="icon key-icon">
+                    <i class="fas fa-key"></i>
+                </span>
+                {{ form.confirm(class_='form-control', placeholder="Confirmer le mot de passe") }}
+            </div>
+            <ul>
+                {% for error in form.confirm.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <button id="create-account-button" type="submit">Créer un compte</button>
+        </div>
+        {{ form.csrf_token }}
+    </form>
+    <a href="/" id="home-button">Retour à la page d'accueil</a>
+{% endblock %}

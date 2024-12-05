@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue sur GOAT!</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('https://img.freepik.com/photos-gratuite/composition-noel-branches-sapin-cadeaux_23-2147950494.jpg') no-repeat center center fixed; /* Fond de Noël */
+            background-size: cover;
+            margin: 0; /* Ajustement pour supprimer la marge par défaut */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #FFD700; /* Couleur du titre en or */
+            margin-top: 30px;
+            text-shadow: 2px 2px 4px #000000; /* Ombre de texte pour améliorer la lisibilité */
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 40px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.7); /* Légère ombre pour le conteneur des boutons */
+            border-radius: 15px;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.8); /* Fond du conteneur des boutons */
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            background-color: #228B22; /* Vert foncé pour le bouton */
+            color: white;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.9); /* Ombre légère au survol du bouton */
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenue sur GOAT!</h1>
+    <div class="button-container">
+        <a href="/login"><button id="connexion">Connexion</button></a>
+        <a href="/register"><button id="inscription">Inscription</button></a>
+    </div>
+</body>
+</html>

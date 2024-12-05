@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden; /* Pour éviter le défilement vertical */
+        }
+
+        video {
+            position: fixed;
+            z-index: -1; /* Assure que la vidéo est en arrière-plan */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+        }
+
+        h1 {
+            color: rgb(155, 48, 48); /* Couleur du texte */
+            font-size: 24px; /* Taille du texte */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop>
+        <source src="../fond/Christmas_Santa_Sleigh_Motion_Background_4K.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <h1>Bienvenue, {{ username }}!</h1>
+</body>
+</html>

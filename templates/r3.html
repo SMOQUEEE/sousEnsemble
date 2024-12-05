@@ -1,0 +1,188 @@
+{% extends "outils.html" %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #16a085, #2ecc71, #3498db);
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        form {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 300px;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        input {
+            padding: 10px;
+            border: 2px solid #16a085;
+            border-radius: 5px;
+            margin-top: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.9);
+            transition: border-color 0.3s ease;
+        }
+
+        input::placeholder {
+            color: #888;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2ecc71;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            padding-left: 20px;
+            text-align: center;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        p {
+            color: red;
+            text-align: center;
+        }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .icon {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            height: 100%;
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #333;
+        }
+
+        .user-icon,
+        .key-icon {
+            left: -25px;
+        }
+
+        #home-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        #home-button:hover {
+            background-color: #c0392b;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+        }
+
+        #create-account-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            background-color: #27ae60;
+            color: white;
+        }
+
+        #create-account-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+
+    <h1>Créer un compte</h1>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <form action="{{ url_for('register') }}" method="POST">
+        <div>
+            <label for="{{ form.username.name }}">Nom d'utilisateur</label>
+            <div class="input-icon">
+                <span class="icon user-icon">
+                    <i class="fas fa-user"></i>
+                </span>
+                {{ form.username(class_='form-control', placeholder="Nom d'utilisateur", autocomplete="off", autofocus=true) }}
+            </div>
+            <ul>
+                {% for error in form.username.errors %}
+                    <li style="color: red;">{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <label for="{{ form.password.name }}">Mot de passe</label>
+            <div class="input-icon">
+                <span class="icon key-icon">
+                    <i class="fas fa-key"></i>
+                </span>
+                {{ form.password(class_='form-control', placeholder="Mot de passe") }}
+            </div>
+            <ul>
+                {% for error in form.password.errors %}
+                    <li style="color: red;">{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <label for="{{ form.confirm.name }}">Confirmer le mot de passe</label>
+            <div class="input-icon">
+                <span class="icon key-icon">
+                    <i class="fas fa-key"></i>
+                </span>
+                {{ form.confirm(class_='form-control', placeholder="Confirmer le mot de passe") }}
+            </div>
+            <ul>
+                {% for error in form.confirm.errors %}
+                    <li style="color: red;">{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            {{ form.submit(class_='form-control', id='create-account-button', value="Créer un compte") }}
+        </div>
+        {{ form.csrf_token }}
+    </form>
+    <a href="/"><button id="home-button">Retour à la page d'accueil</button></a>
+{% endblock %}

@@ -2,6 +2,9 @@
 #include <stdlib.h>
 
 
+
+//ddljdndjn
+
 struct retour {
     int N;
     int K;

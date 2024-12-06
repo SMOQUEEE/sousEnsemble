@@ -18,10 +18,42 @@
     </div>
     <div class="particles" id="particles"></div>
     
-    <audio id="gameMusic" loop>
+    <audio id="gameMusic" loop autoplay>
         <source src="{{ url_for('static', filename='music.mp3') }}" type="audio/mp3">
     </audio>
+    <audio id="gameOverMusic">
+        <source src="{{ url_for('static', filename='gameover.mp3') }}" type="audio/mp3">
+    </audio>
+        
     
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const audio = document.getElementById("gameMusic");
+
+            // Essayer de jouer automatiquement
+            const playPromise = audio.play();
+
+            if (playPromise !== undefined) {
+                playPromise
+                    .then(() => {
+                        console.log("Musique lancée automatiquement.");
+                    })
+                    .catch(error => {
+                        console.warn("La lecture automatique a été bloquée par le navigateur : ", error);
+
+                        // Ajouter un écouteur pour démarrer la musique à la première interaction
+                        const startButton = document.getElementById("startButton");
+                        if (startButton) {
+                            startButton.addEventListener("click", () => {
+                                audio.play();
+                                console.log("Musique lancée après interaction.");
+                            });
+                        }
+                    });
+            }
+        });
+    </script>
+
     <script src="{{ url_for('static', filename='game.js') }}"></script>
 </body>
 </html>

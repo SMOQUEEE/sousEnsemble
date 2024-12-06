@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 2 - L'Océan Vivant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="ocean-background page2">
+        <div class="overlay"></div>
+        <video autoplay muted loop id="oceanVideo">
+            <source src="{{ url_for('static', filename='video/ocean.mp4') }}" type="video/mp4">
+        </video>
+        <div class="welcome-content">
+            <h1>Bienvenue dans les Profondeurs</h1>
+            <p>Découvrez les merveilles cachées de l'océan...</p>
+        </div>
+        <a href="{{ url_for('index') }}" class="next-button return">
+            <span>Retour</span>
+            <div class="button-glow"></div>
+        </a>
+    </div>
+</body>
+</html>

@@ -150,8 +150,12 @@ def login():
                 return redirect(url_for('admin_page'))  # Rediriger vers la page admin
             else:
                 # Choix aléatoire du template pour la page de login
-                template = random_template(img_routes['templates'])
-                return render_template(template, form=login_form)
+                # template = random_template(img_routes['templates'])
+                # return render_template(template, form=login_form)
+                return render_template('page1.html', form=login_form)
+
+
+                
         else:
             error_message = 'Identifiant ou mot de passe incorrect'
             return render_template('l2.html', form=login_form, error_message=error_message)
@@ -216,6 +220,23 @@ def pacman():
 @login_required
 def memory():
     return render_template('memory.html', username = current_user.username)
+
+
+
+@app.route('/page1')
+@login_required
+def page1():
+    return render_template('page1.html', username = current_user.username)
+
+@app.route('/page2')
+def page2():
+    return render_template('page2.html')
+
+
+@app.route('/jouer')
+def jouer():
+    return render_template('img3.html')
+
 
 
 # Route pour supprimer un client de la base de donnee 

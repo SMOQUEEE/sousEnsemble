@@ -227,7 +227,7 @@ class PacMan {
         this.gameMusic.currentTime = 0;
         this.gameOverMusic.play();
         setTimeout(() => {
-            alert('Game Over!');
+            alert('Game Over! \n Fin de l aventure.... \n Merci de votre participation');
             this.setupGame();
         }, 500);
     }

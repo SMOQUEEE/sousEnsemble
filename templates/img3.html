@@ -74,7 +74,8 @@
         </video>
         <div class="content">
             <h1>Bienvenue {{ username }} ! Appuyer sur cette magnifique boule !</h1>
-            <img id="toggleButton" src="{{img_url}}" onclick="moveButton()" alt="Bouton Image">
+            <img id="toggleButton" src="/static/img/boullos.png" onclick="moveButton()" alt="Bouton Image">
+            <!-- <img id="toggleButton" src="{{img_url}}" onclick="moveButton()" alt="Bouton Image"> -->
         </div>
     </div>
 
@@ -128,7 +129,8 @@
                 }
             } else {
                 // Rediriger l'utilisateur vers une nouvelle page après deux clics
-                window.location.href = "/index2";
+                // window.location.href = "/index2";
+                window.location.href = "/mem"; // redirige sur memoire 
             }
         }
 

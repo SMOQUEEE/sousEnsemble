@@ -207,7 +207,17 @@ def index():
 def index2():
     return render_template('tetris.html', username = current_user.username)
 
-    
+@app.route('/pacman')
+@login_required
+def pacman():
+    return render_template('pacman.html', username = current_user.username)
+
+@app.route('/mem')
+@login_required
+def memory():
+    return render_template('memory.html', username = current_user.username)
+
+
 # Route pour supprimer un client de la base de donnee 
 @app.route('/delete_client/<int:user_id>', methods=['POST'])
 @admin_required  # Utilisation du décorateur pour restreindre l'accès à l'administrateur

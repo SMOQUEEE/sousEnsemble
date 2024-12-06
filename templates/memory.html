@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de Mémoire</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/memory.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Jeu de Mémoire</h1>
+        <div class="timer">60</div>
+        <button class="start-button" onclick="startGame()">Commencer le jeu</button>
+        <div class="game-board"></div>
+    </div>
+
+    <div class="victory-screen">
+        <h2>Victoire !</h2>
+        <button onclick="resetGame()">Rejouer</button>
+        <button id="tac" onclick="window.location.href='/index2'">Continuer</button>
+    </div>
+
+    <div class="game-over-screen">
+        <h2>Temps écoulé !</h2>
+        <button onclick="resetGame()">Réessayer</button>
+        <a href="/index2"><button id="tic">continuer</button></a>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/memory.js') }}"></script>
+</body>
+</html>

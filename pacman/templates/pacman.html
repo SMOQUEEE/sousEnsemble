@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pac-Man Rétro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='pacman.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">PAC-MAN</h1>
+        <div id="score">Score: 0</div>
+        <div id="game-container">
+            <canvas id="gameCanvas" width="448" height="496"></canvas>
+        </div>
+        <button id="startButton" class="start-btn">COMMENCER</button>
+    </div>
+    <div class="particles" id="particles"></div>
+    
+    <audio id="gameMusic" loop autoplay>
+        <source src="{{ url_for('static', filename='music.mp3') }}" type="audio/mp3">
+    </audio>
+    <audio id="gameOverMusic">
+        <source src="{{ url_for('static', filename='gameover.mp3') }}" type="audio/mp3">
+    </audio>
+        
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const audio = document.getElementById("gameMusic");
+
+            // Essayer de jouer automatiquement
+            const playPromise = audio.play();
+
+            if (playPromise !== undefined) {
+                playPromise
+                    .then(() => {
+                        console.log("Musique lancée automatiquement.");
+                    })
+                    .catch(error => {
+                        console.warn("La lecture automatique a été bloquée par le navigateur : ", error);
+
+                        // Ajouter un écouteur pour démarrer la musique à la première interaction
+                        const startButton = document.getElementById("startButton");
+                        if (startButton) {
+                            startButton.addEventListener("click", () => {
+                                audio.play();
+                                console.log("Musique lancée après interaction.");
+                            });
+                        }
+                    });
+            }
+        });
+    </script>
+
+    <script src="{{ url_for('static', filename='game.js') }}"></script>
+</body>
+</html>

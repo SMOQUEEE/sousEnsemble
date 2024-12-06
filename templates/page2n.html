@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 2 - L'Océan Vivant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/first.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="ocean-background page2">
+        <div class="overlay"></div>
+        <video autoplay muted loop id="oceanVideo">
+            <source src="{{ url_for('static', filename='video/ocean.mp4') }}" type="video/mp4">
+        </video>
+        <div class="welcome-content">
+            <h1>Bienvenue dans les Profondeurs</h1>
+            <p>Trouvez le bouton suivant caché pour continuer l'aventure  😊 <br> <br></p>
+            <p style="text-align: justify; line-height: 1.8; font-family: Arial, sans-serif; color: #333; margin: 20px; padding: 15px; border-left: 4px solid #0077b6; background-color: #f4f9f9; border-radius: 5px;">
+                L’océan, à l’image du corps humain, joue des rôles vitaux et interconnectés pour la planète. <br> 
+                <span style="font-weight: bold; color: #0077b6;">"Le Foie océanique"</span> filtre et stocke les excès de carbone, détoxifiant ainsi notre planète comme le foie humain le fait pour le corps, contribuant à la lutte contre le changement climatique.<br> 
+                <span style="font-weight: bold; color: #0077b6;">"Le Système immunitaire aquatique"</span> trouve son équivalent dans les zones humides côtières et les mangroves, qui protègent des tempêtes et des inondations comme un bouclier naturel. Les rivières et courants marins, symbolisés par <br> 
+                <span style="font-weight: bold; color: #0077b6;">"Les Veines et Artères sous-marines"</span>, assurent le transport et la connexion entre les systèmes terrestres et océaniques, à l’image des vaisseaux sanguins humains. <br>
+                <span style="font-weight: bold; color: #0077b6;">"Le Cerveau profond"</span>, quant à lui, représente les abysses mystérieux et inexploités, regorgeant de secrets et de potentiels non découverts, rappelant les zones inconnues de notre cerveau. En régulant la température terrestre, 
+                <span style="font-style: italic; font-weight: bold; color: #0077b6;">"La Température corporelle mondiale"</span> agit comme le corps humain stabilisant sa chaleur interne, absorbant les excès pour éviter des déséquilibres climatiques. Enfin, l’océan porte aussi <br>
+                <span style="font-weight: bold; color: #0077b6;">"Les Blessures invisibles"</span> causées par la pollution, l’acidification et la surpêche, des cicatrices souvent cachées mais tout aussi destructrices, semblables aux dommages invisibles causés par le stress chronique ou de mauvaises habitudes sur notre santé.
+            </p>
+            
+        </div>
+        <a href="/jouer" class="next-button return">
+            <span>Jouer, ca vous dit !</span>
+            <div class="button-glow"></div>
+        </a>
+    </div>
+</body>
+</html>

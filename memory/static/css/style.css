@@ -15,32 +15,35 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 900px;
     padding: 20px;
     text-align: center;
 }
 
 .timer {
-    font-size: 2em;
+    font-size: 2.5em;
     margin: 20px 0;
     color: #fff;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .game-board {
+    transform: scale(0.80) translateY(-120px);
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
-    margin: 20px auto;
+    grid-template-columns: repeat(4, 200px); /* Augmentez chaque colonne à 200px */
+    grid-gap: 20px; /* Ajustez l'espacement entre les cartes */
+    margin: 10px auto;
     perspective: 1000px;
 }
 
 .card {
-    aspect-ratio: 3/4;
+    width: 200px; /* Fixe la largeur */
+    aspect-ratio: 3/4; /* Maintient le ratio de 3:4 */
     cursor: pointer;
     position: relative;
     transform-style: preserve-3d;
 }
+
 
 .card-inner {
     position: relative;
@@ -72,11 +75,14 @@ body {
     background-size: cover;
     background-position: center;
     transform: rotateY(180deg);
+    background-repeat: no-repeat;
+    background-color: black;
+    object-fit: cover;
 }
 
 .start-button {
     padding: 15px 30px;
-    font-size: 1.2em;
+    font-size: 1.5em;
     background: linear-gradient(45deg, #6e8efb, #a777e3);
     border: none;
     border-radius: 25px;
@@ -148,10 +154,14 @@ body {
 
 @media (max-width: 768px) {
     .game-board {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .container {
         padding: 10px;
+    }
+
+    .timer {
+        font-size: 2em;
     }
 }

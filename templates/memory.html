@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jeu de Mémoire</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/memory.css') }}">
 </head>
 <body>
     <div class="container">
@@ -17,13 +17,15 @@
     <div class="victory-screen">
         <h2>Victoire !</h2>
         <button onclick="resetGame()">Rejouer</button>
+        <a href="/index2"><button id="tac">continuer</button></a>
     </div>
 
     <div class="game-over-screen">
         <h2>Temps écoulé !</h2>
         <button onclick="resetGame()">Réessayer</button>
+        <a href="/index2"><button id="tic">continuer</button></a>
     </div>
 
-    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/memory.js') }}"></script>
 </body>
 </html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Océan Vivant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/first.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="ocean-background">
+        <div class="overlay"></div>
+        <video autoplay muted loop id="oceanVideo">
+            <source src="{{ url_for('static', filename='video/ocean.mp4') }}" type="video/mp4">
+        </video>
+        
+        <div class="bubbles-container">
+            <div class="bubble" data-title="Le Cœur de l'océan">
+                <div class="bubble-inner">
+                    <div class="bubble-front">
+                        <h2>Le Cœur de l'océan</h2>
+                        <div class="bubble-glow"></div>
+                    </div>
+                    <div class="bubble-back">
+                        <p>Comme le cœur humain pompe le sang, les courants océaniques transportent chaleur et nutriments essentiels, maintenant un équilibre vital pour la vie marine et terrestre.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bubble" data-title="Les Poumons bleus">
+                <div class="bubble-inner">
+                    <div class="bubble-front">
+                        <h2>Les Poumons bleus</h2>
+                        <div class="bubble-glow"></div>
+                    </div>
+                    <div class="bubble-back">
+                        <p>Les océans produisent 50 % de l'oxygène mondial, agissant comme les poumons de la planète grâce à la photosynthèse des phytoplanctons.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bubble" data-title="La Peau liquide">
+                <div class="bubble-inner">
+                    <div class="bubble-front">
+                        <h2>La Peau liquide</h2>
+                        <div class="bubble-glow"></div>
+                    </div>
+                    <div class="bubble-back">
+                        <p>La surface de l'océan protège les écosystèmes marins comme la peau humaine protège les organes internes, en régulant les échanges avec l'atmosphère.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bubble" data-title="Le Squelette marin">
+                <div class="bubble-inner">
+                    <div class="bubble-front">
+                        <h2>Le Squelette marin</h2>
+                        <div class="bubble-glow"></div>
+                    </div>
+                    <div class="bubble-back">
+                        <p>Les récifs coralliens jouent un rôle semblable à celui du squelette humain, soutenant des millions d'espèces et fournissant structure et protection.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="{{ url_for('page2') }}" class="next-button">
+            <span>Suivant</span>
+            <div class="button-glow"></div>
+        </a>
+    </div>
+    <script src="{{ url_for('static', filename='js/bubbles.js') }}"></script>
+</body>
+</html>

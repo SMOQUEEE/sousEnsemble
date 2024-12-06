@@ -244,3 +244,27 @@ p {
         transform: scale(1);
     }
 }
+
+.hint {
+    position: fixed;
+    bottom: 80px; /* Juste au-dessus du bouton */
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    z-index: 10;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Animation pour apparaître en douceur */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
